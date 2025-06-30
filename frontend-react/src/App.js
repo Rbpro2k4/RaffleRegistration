@@ -28,13 +28,13 @@ function App() {
 
   return (
     <div className="App">
-      <Login />
-      <form onSubmit={handleSubmit}>
-        <input name="code" placeholder="Code" value={form.code} onChange={handleChange} required />
-        <input name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
-        <input name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
-        <input name="phone" placeholder="Phone" value={form.phone} onChange={handleChange} required />
-        <button type="submit">Good Luck!</button>
+      <Login form={form} onChange={handleChange} onSubmit={handleSubmit} />
+      {message && <div>{message}</div>}
+    </div>
+  );
+}
+
+export default App;
       </form>
       {message && <div>{message}</div>}
     </div>

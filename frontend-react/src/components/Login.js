@@ -100,41 +100,69 @@ const Register = styled.div`
   margin: 20px 0 15px;
 `;
 
-function Login() {
+function Login({ form, onChange, onSubmit }) {
   return (
     <Container>
       <Box>
         <Title>Welcome</Title>
-        
-        <InputBox>
-          <Input type="text" placeholder="Name" required />
-          <Icon><FaUser /></Icon>
-        </InputBox>
+        <form onSubmit={onSubmit}>
+          <InputBox>
+            <Input
+              type="text"
+              name="name"
+              placeholder="Name"
+              value={form.name}
+              onChange={onChange}
+              required
+            />
+            <Icon><FaUser /></Icon>
+          </InputBox>
 
-        <InputBox>
-          <Input type="email" placeholder="Email" required />
-          <Icon><FaEnvelope /></Icon>
-        </InputBox>
+          <InputBox>
+            <Input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={form.email}
+              onChange={onChange}
+              required
+            />
+            <Icon><FaEnvelope /></Icon>
+          </InputBox>
 
-        <InputBox>
-          <Input type="tel" placeholder="Phone Number" required />
-          <Icon><FaPhone /></Icon>
-        </InputBox>
+          <InputBox>
+            <Input
+              type="tel"
+              name="phone"
+              placeholder="Phone Number"
+              value={form.phone}
+              onChange={onChange}
+              required
+            />
+            <Icon><FaPhone /></Icon>
+          </InputBox>
 
-        <InputBox>
-          <Input type="password" placeholder="Code" required />
-          <Icon><FaLock /></Icon>
-        </InputBox>
+          <InputBox>
+            <Input
+              type="text"
+              name="code"
+              placeholder="Code"
+              value={form.code}
+              onChange={onChange}
+              required
+            />
+            <Icon><FaLock /></Icon>
+          </InputBox>
 
-        <RememberForgot>
-          <label>
-            <Checkbox type="checkbox" /> I agree to receive updates and notifications
-          </label>
-          <Link href="#">Love by Ralph</Link>
-        </RememberForgot>
+          <RememberForgot>
+            <label>
+              <Checkbox type="checkbox" /> I agree to receive updates and notifications
+            </label>
+            <Link href="#">Love by Ralph</Link>
+          </RememberForgot>
 
-        <SubmitButton type="submit">Good Luck!</SubmitButton>
-
+          <SubmitButton type="submit">Good Luck!</SubmitButton>
+        </form>
         <Register>
           <p>Problem? <Link href="#">Contact us!</Link></p>
         </Register>
