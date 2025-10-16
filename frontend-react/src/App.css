@@ -4,3 +4,30 @@
   margin: 0;
   padding: 0;
 }
+
+.good-luck-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.good-luck-btn:hover {
+  background-color: #388e3c;
+  transform: translateY(-2px) scale(1.04);
+}
+
+.good-luck-btn:active {
+  background-color: #2e7031;
+  transform: scale(0.97);
+}
+
+.message {
+  margin-top: 16px;
+  font-weight: bold;
+  color: #333;
+}

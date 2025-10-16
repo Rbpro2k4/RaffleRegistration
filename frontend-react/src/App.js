@@ -16,15 +16,22 @@ function App() {
     setMessage('');
     setLoading(true);
     try {
-      const res = await fetch('/.netlify/functions/checkCode', {
+      // Use local Netlify dev server when running locally, otherwise use relative path
+      const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      const endpoint = isLocal
+        ? 'http://localhost:8888/.netlify/functions/checkCode'
+        : '/.netlify/functions/checkCode';
+
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
       const data = await res.json();
-      setMessage(data.message);
+      // Always use data.message for feedback
+      setMessage(data.message || 'No message from server.');
     } catch (err) {
-      setMessage('An error occurred. Please try again.');
+      setMessage('Network error or server unavailable.');
     }
     setLoading(false);
   };
@@ -37,7 +44,11 @@ function App() {
         <input name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
         <input name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
         <input name="phone" placeholder="Phone" value={form.phone} onChange={handleChange} required />
-        <button type="submit" disabled={loading}>
+        <button
+          className="good-luck-btn"
+          type="submit"
+          disabled={loading}
+        >
           {loading ? (
             <span className="spinner"></span>
           ) : (
@@ -45,7 +56,7 @@ function App() {
           )}
         </button>
       </form>
-      {message && <div>{message}</div>}
+      {message && <div className="message">{message}</div>}
       <style>
         {`
           .spinner {
@@ -61,6 +72,26 @@ function App() {
           @keyframes spin {
             0% { transform: rotate(0deg);}
             100% { transform: rotate(360deg);}
+          }
+          .good-luck-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s, transform 0.3s;
+          }
+          .good-luck-btn:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+          }
+          .good-luck-btn:active {
+            transform: scale(0.95);
           }
         `}
       </style>
